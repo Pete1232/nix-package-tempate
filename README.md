@@ -11,10 +11,6 @@ Instructions below on how to run this package locally. When creating
 a tag in Github it will publish this to GH packages so it can be
 downloaded like any other container.
 
-Some parts of this reference [Cachix](https://app.cachix.org) which
-will need to be updated to point to an account you have control over,
-or could be commented out.
-
 ## development environment
 
 Start a nix shell with
