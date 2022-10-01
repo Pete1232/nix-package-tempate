@@ -1,12 +1,12 @@
-val projectName = "subscription-cqrs"
+val projectName = "nix-package-template"
 
 val sharedSettings = Seq(
   organization := "com.pete1232",
   scalaVersion := "2.13.8",
   scmInfo := Some(
     ScmInfo(
-      url("https://github.com/pete1232/subscription-cqrs"),
-      "https://github.com/pete1232/subscription-cqrs.git"
+      url("https://github.com/pete1232/nix-package-template"),
+      "https://github.com/pete1232/nix-package-template.git"
     )
   )
 )

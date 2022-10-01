@@ -42,7 +42,7 @@
           '';
 
           core = sbt-derivation.lib.mkSbtDerivation {
-            pname = "subscription-cqrs";
+            pname = "nix-package-template";
             version = "latest";
             src = gitignoreSource self;
             pkgs = pkgs;
@@ -70,7 +70,7 @@
               contents = [ core pkgs.jre_minimal ];
 
               config = {
-                Cmd = [ "java" "-jar" "subscription-cqrs-assembly-core.jar" ];
+                Cmd = [ "java" "-jar" "nix-package-template-assembly-core.jar" ];
               };
             };
         });

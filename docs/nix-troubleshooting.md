@@ -17,7 +17,7 @@ Any Nix files need to be staged in Git for them to be picked up
 The scalafmt config version must match the installed version. If not it will have to download config and will fail.
 
 ```text
-error: builder for '/nix/store/jbrxzplj7dfpr0kad55link3bygnnmrx-subscription-cqrs-latest.drv' failed with exit code 8;
+error: builder for '/nix/store/jbrxzplj7dfpr0kad55link3bygnnmrx-nix-package-template-latest.drv' failed with exit code 8;
        last 10 log lines:
        >       at org.scalafmt.dynamic.ScalafmtConfigLoader$CachedProxy.load(ScalafmtConfigLoader.scala:70)
        >   at org.scalafmt.dynamic.ScalafmtDynamic.resolveConfig(ScalafmtDynamic.scala:53)
@@ -34,7 +34,7 @@ error: builder for '/nix/store/jbrxzplj7dfpr0kad55link3bygnnmrx-subscription-cqr
 The sbt-derivation sha will need to match that which is generated. If it doesn't an obscure error like this may be produced
 
 ```text
-error: builder for '/nix/store/clgzs21q17cs4vh8i2pqwc5kv3q4krsh-subscription-cqrs-latest.drv' failed with exit code 1;
+error: builder for '/nix/store/clgzs21q17cs4vh8i2pqwc5kv3q4krsh-nix-package-template-latest.drv' failed with exit code 1;
        last 10 log lines:
        > [error]       at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
        > [error]  at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
@@ -52,7 +52,7 @@ Setting the sha to `""` will print out the correct value.
 
 ```text
 warning: found empty hash, assuming 'sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA='
-error: hash mismatch in fixed-output derivation '/nix/store/5xzg6f9ibyk3j1d2skvaxlmxqkx2p8g6-subscription-cqrs-sbt-dependencies.tar.zst.drv':
+error: hash mismatch in fixed-output derivation '/nix/store/5xzg6f9ibyk3j1d2skvaxlmxqkx2p8g6-nix-package-template-sbt-dependencies.tar.zst.drv':
          specified: sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
             got:    sha256-wq/R6AUrWP3ZUtTefbMXSfJA7R2bTHZLy9Pfj8lG3vM=
 ```
@@ -67,7 +67,7 @@ are updated then the sha-256 will need to be updated. The build derivation shoul
 
 ## Cachix debugging
 
-[test build](https://github.com/Pete1232/subscription-cqrs/actions/runs/3165661727), will eventually be deleted
+[test build](https://github.com/Pete1232/nix-package-template/actions/runs/3165661727), will eventually be deleted
 
 Initial build 4m20s
 
@@ -75,8 +75,8 @@ Re-running an identical build outputs the following:
 
 ```text
  this path will be fetched (196.28 MiB download, 198.59 MiB unpacked):
-  /nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz
-copying path '/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz' from 'https://pete1232.cachix.org'...
+  /nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz
+copying path '/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz' from 'https://pete1232.cachix.org'...
 ```
 
 Finished in 35s
@@ -85,8 +85,8 @@ No point caching that though - it won't be common to re-build the exact same der
 
 ```text
  this path will be fetched (196.28 MiB download, 198.59 MiB unpacked):
-  /nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz
-copying path '/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz' from 'https://pete1232.cachix.org'...
+  /nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz
+copying path '/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz' from 'https://pete1232.cachix.org'...
 ```
 
 Finished in 1m29s
@@ -98,21 +98,21 @@ Making a code change to see what needs to be re-generated.
 Before:
 
 ```text
-/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz 196.27 MiB 198.58 MiB 2022-10-01T18:32:08.780Z 
-/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-subscription-cqrs-sbt-dependencies.tar.zst 80.72 MiB 81.82 MiB 2022-10-01T17:59:11.017Z 
-/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-subscription-cqrs 17.64 MiB 51.07 MiB 2022-10-01T18:22:58.871Z 
+/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz 196.27 MiB 198.58 MiB 2022-10-01T18:32:08.780Z 
+/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-nix-package-template-sbt-dependencies.tar.zst 80.72 MiB 81.82 MiB 2022-10-01T17:59:11.017Z 
+/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-nix-package-template 17.64 MiB 51.07 MiB 2022-10-01T18:22:58.871Z 
 /nix/store/d2ram0dar3wayqkricw4smq9zp5nwkfc-sbt-1.6.2 15.98 MiB 50.7 MiB 2022-10-01T18:26:16.703Z 
-/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-subscription-cqrs-latest 5.28 MiB 5.71 MiB never 
+/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-nix-package-template-latest 5.28 MiB 5.71 MiB never 
 /nix/store/bsaji0zhqa37l91x85rkqa78v7jv1vcl-runtime-deps 5.22 KiB 9.17 KiB never 
 /nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3 748 B 3.91 KiB 2022-10-01T18:26:16.706Z 
 /nix/store/w5wzqrd1x1zpk5486i5yxy86r27faq9r-extract-dependencies 672 B 912 B never 
-/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-subscription-cqrs-config.json 252 B 256 B never
+/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-nix-package-template-config.json 252 B 256 B never
 ```
 
 Logs, show what was re-used:
 
 ```text
-copying path '/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-subscription-cqrs-sbt-dependencies.tar.zst' from 'https://pete1232.cachix.org'...
+copying path '/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-nix-package-template-sbt-dependencies.tar.zst' from 'https://pete1232.cachix.org'...
 ...
 copying path '/nix/store/d2ram0dar3wayqkricw4smq9zp5nwkfc-sbt-1.6.2' from 'https://pete1232.cachix.org'...
 copying path '/nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3' from 'https://pete1232.cachix.org'...
@@ -121,19 +121,19 @@ copying path '/nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3' from '
 After:
 
 ```text
-/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz 196.27 MiB 198.58 MiB 2022-10-01T18:32:08.780Z 
-/nix/store/yvfnpimk2bcfbp51pw1a2h0n5j3a1v23-docker-image-subscription-cqrs.tar.gz 196.27 MiB 198.58 MiB never 
-/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-subscription-cqrs-sbt-dependencies.tar.zst 80.72 MiB 81.82 MiB 2022-10-01T18:40:43.087Z 
-/nix/store/mg0g8pzly1vzkv3lsd1p49livglx374b-docker-layer-subscription-cqrs 17.64 MiB 51.07 MiB never 
-/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-subscription-cqrs 17.64 MiB 51.07 MiB 2022-10-01T18:22:58.871Z 
+/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz 196.27 MiB 198.58 MiB 2022-10-01T18:32:08.780Z 
+/nix/store/yvfnpimk2bcfbp51pw1a2h0n5j3a1v23-docker-image-nix-package-template.tar.gz 196.27 MiB 198.58 MiB never 
+/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-nix-package-template-sbt-dependencies.tar.zst 80.72 MiB 81.82 MiB 2022-10-01T18:40:43.087Z 
+/nix/store/mg0g8pzly1vzkv3lsd1p49livglx374b-docker-layer-nix-package-template 17.64 MiB 51.07 MiB never 
+/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-nix-package-template 17.64 MiB 51.07 MiB 2022-10-01T18:22:58.871Z 
 /nix/store/d2ram0dar3wayqkricw4smq9zp5nwkfc-sbt-1.6.2 15.98 MiB 50.7 MiB 2022-10-01T18:40:43.092Z 
-/nix/store/3l5p18p1dcf0rg67hi6fbcfzlasdjiyv-subscription-cqrs-latest 5.28 MiB 5.71 MiB never 
-/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-subscription-cqrs-latest 5.28 MiB 5.71 MiB never 
+/nix/store/3l5p18p1dcf0rg67hi6fbcfzlasdjiyv-nix-package-template-latest 5.28 MiB 5.71 MiB never 
+/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-nix-package-template-latest 5.28 MiB 5.71 MiB never 
 /nix/store/1gxir0rvy5nc5f3x8zxh1svwfjyl2y65-runtime-deps 5.22 KiB 9.17 KiB never 
 /nix/store/bsaji0zhqa37l91x85rkqa78v7jv1vcl-runtime-deps 5.22 KiB 9.17 KiB never 
 /nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3 748 B 3.91 KiB 2022-10-01T18:40:43.128Z 
 /nix/store/w5wzqrd1x1zpk5486i5yxy86r27faq9r-extract-dependencies 672 B 912 B never 
-/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-subscription-cqrs-config.json 252 B 256 B never
+/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-nix-package-template-config.json 252 B 256 B never
 ```
 
 So TL;DR is that the `sbt-dependencies` derivation _is_ definitely re-used as long as the dependencies are unchanged, and is therefore worth caching.
@@ -143,38 +143,38 @@ The docker layers and images are _not_ reused if the code changes.
 Don't cache:
 
 ```text
-/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-subscription-cqrs.tar.gz
-/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-subscription-cqrs
-/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-subscription-cqrs-latest
+/nix/store/klpcqjmd184slrli4xhc020cmzmpjdkk-docker-image-nix-package-template.tar.gz
+/nix/store/7w25gp6695hdrjndixgysdpchvy7gymb-docker-layer-nix-package-template
+/nix/store/g15mknl2gj2fbimh6wj54sh5yv19crlr-nix-package-template-latest
 /nix/store/bsaji0zhqa37l91x85rkqa78v7jv1vcl-runtime-deps
 ```
 
 Cache:
 
 ```text
-/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-subscription-cqrs-sbt-dependencies.tar.zst
+/nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-nix-package-template-sbt-dependencies.tar.zst
 /nix/store/d2ram0dar3wayqkricw4smq9zp5nwkfc-sbt-1.6.2
 /nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3
 /nix/store/w5wzqrd1x1zpk5486i5yxy86r27faq9r-extract-dependencies
-/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-subscription-cqrs-config.json
+/nix/store/j55gbrx5wjhqd5205999n7zn4qaqlwqz-nix-package-template-config.json
 ```
 
 `pushFilter` Regex:
 
 ```text
-(-source$|.*docker.*$|.*subscription-cqrs-latest$|.*runtime-deps$)
+(-source$|.*docker.*$|.*nix-package-template-latest$|.*runtime-deps$)
 ```
 
 But... the last two aren't pushed each time - but also aren't used. So lets not cache those either.
 
 ```text
-(-source$|.*docker.*$|.*subscription-cqrs-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
+(-source$|.*docker.*$|.*nix-package-template-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
 ```
 
 And finally, cache sources for re-use. They are numerous but don't take much space, and will mean the build doesn't need to rely on external dependencies at all.
 
 ```text
-(.*docker.*$|.*subscription-cqrs-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
+(.*docker.*$|.*nix-package-template-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
 ```
 
 After all this:
@@ -182,7 +182,7 @@ After all this:
 ```text
 
 Cachix: push
-  /home/runner/work/_actions/cachix/cachix-action/v10/dist/main/push-paths.sh /home/runner/.nix-profile/bin/cachix pete1232 (.*docker.*$|.*subscription-cqrs-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
+  /home/runner/work/_actions/cachix/cachix-action/v10/dist/main/push-paths.sh /home/runner/.nix-profile/bin/cachix pete1232 (.*docker.*$|.*nix-package-template-latest$|.*runtime-deps$|.*extract-dependencies$|.*config.json$)
   compressing and pushing /nix/store/5s01h4cmhpswl7sg3rslazwgw6nzd1gg-source (10.68 KiB)
   compressing and pushing /nix/store/i7hfp6crdfhdjy9wgrdzqqmi0mad7ag7-source (23.98 KiB)
   compressing and pushing /nix/store/6l0wninl4kkcg7aid41x9l36xr7f3snf-scalafmt-3.4.3 (3.91 KiB)
@@ -190,7 +190,7 @@ Cachix: push
   compressing and pushing /nix/store/d2ram0dar3wayqkricw4smq9zp5nwkfc-sbt-1.6.2 (50.71 MiB)
   compressing and pushing /nix/store/nbkbs33bkw54f60kv5c5y48714l00dpw-source (24.79 KiB)
   compressing and pushing /nix/store/qjw6nq34h4s78573nh70gsl2a2qz76mz-source (51.09 KiB)
-  compressing and pushing /nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-subscription-cqrs-sbt-dependencies.tar.zst (81.83 MiB)
+  compressing and pushing /nix/store/sbqmyyaqyk5s4zmnjznxbijhidpji211-nix-package-template-sbt-dependencies.tar.zst (81.83 MiB)
   compressing and pushing /nix/store/xhfy6pf3jc023jda49x5w7vngcwcjlw5-source (16.15 KiB)
   compressing and pushing /nix/store/zj0z258z5zqcc74nbn23kfz5x12rx6hn-source (7.68 KiB)
 ```
