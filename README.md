@@ -1,5 +1,20 @@
 # nix-package-template
 
+Experiment to attempt to build a Scala application using Nix as much
+as possible. Running `nix build` will create a jar and package it as
+a Docker compatible `tar` file. The only dependency to doing this
+should be [installing Nix](https://nixos.org/download.html). SBT is
+being used to download the application dependencies, doing that with
+Nix would require a lot more dedication.
+
+Instructions below on how to run this package locally. When creating
+a tag in Github it will publish this to GH packages so it can be
+downloaded like any other container.
+
+Some parts of this reference [Cachix](https://app.cachix.org) which
+will need to be updated to point to an account you have control over,
+or could be commented out.
+
 ## development environment
 
 Start a nix shell with
@@ -30,3 +45,8 @@ docker load -i $OUT
 
 docker run nix-package-template:latest
 ```
+
+On push to a pull request branch or merge to master this will
+run in GH Actions pretty much as described here.
+
+On tag it will also push to GH Packages.
