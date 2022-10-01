@@ -12,7 +12,7 @@ Any Nix files need to be staged in Git for them to be picked up
 
 [nix develop --build and phases confusion](https://github.com/NixOS/nix/issues/6202)
 
-[cachix](https://app.cachix.org)
+[cachix](https://app.cachix.org/cache/pete1232)
 
 The scalafmt config version must match the installed version. If not it will have to download config and will fail.
 
@@ -66,6 +66,8 @@ If any of:
 are updated then the sha-256 will need to be updated. The build derivation should be cached so it doesn't need to be rebuilt as often.
 
 ## Cachix debugging
+
+[test build](https://github.com/Pete1232/nix-package-template/actions/runs/3165661727), will eventually be deleted
 
 Initial build 4m20s
 
